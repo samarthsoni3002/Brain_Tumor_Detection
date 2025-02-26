@@ -60,7 +60,7 @@ def test_step(val_dataloader: DataLoader,model: nn.Module,loss_fn: Callable,accu
     return epoch_test_loss,epoch_test_acc
 
 
-def train(epochs: int,train_dataloader: DataLoader,val_dataloader: DataLoader):
+def train(epochs: int,train_dataloader: DataLoader,val_dataloader: DataLoader,model: nn.Module,loss_fn: Callable,optimizer: torch.optim.Optimizer,accuracy_fn: Callable):
     
     train_loss = []
     train_acc = []
@@ -69,7 +69,9 @@ def train(epochs: int,train_dataloader: DataLoader,val_dataloader: DataLoader):
     
     for epoch in range(epochs):
 
-        epoch_train_loss,epoch_train_acc = train_step(train_dataloader,train_loss,train_acc)
-        epoch_test_loss,epoch_test_acc = test_step(val_dataloader, test_loss, test_acc)
+        epoch_train_loss,epoch_train_acc = train_step(train_dataloader,model,loss_fn,optimizer,accuracy_fn,train_loss,train_acc)
+        epoch_test_loss,epoch_test_acc = test_step(val_dataloader, model,loss_fn,accuracy_fn,test_loss, test_acc)
 
         print(f"\n{epoch+1} Train loss: {epoch_train_loss} | Train Accuracy: {epoch_train_acc} | Validation Loss: {epoch_test_loss} | Validation Acc: {epoch_test_acc}")
+    
+    return train_loss,train_acc,test_loss,test_acc

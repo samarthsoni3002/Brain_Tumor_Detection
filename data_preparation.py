@@ -1,7 +1,7 @@
 import torch
 from torch.utils.data import Dataset,DataLoader,random_split
 from torchvision import transforms
-from dataset_creation import BrainTumorDataset
+from data_creation import BrainTumorDataset
 from pathlib import Path
 from typing import Tuple
 
