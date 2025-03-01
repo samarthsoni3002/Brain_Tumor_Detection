@@ -17,8 +17,7 @@ def train_step(train_dataloader: DataLoader,model: nn.Module,loss_fn: Callable,o
         tr_loss = loss_fn(y_pred.squeeze(),y)
         tr_acc = accuracy_fn(y,y_pred.argmax(dim=1))
 
-        train_loss.append(tr_loss)
-        train_acc.append(tr_acc)
+        
 
         epoch_train_loss += tr_loss
         epoch_train_acc += tr_acc
@@ -29,6 +28,9 @@ def train_step(train_dataloader: DataLoader,model: nn.Module,loss_fn: Callable,o
 
     epoch_train_loss/=len(train_dataloader)
     epoch_train_acc/=len(train_dataloader)
+    
+    train_loss.append(epoch_train_loss)
+    train_acc.append(epoch_train_acc)
 
     return epoch_train_loss,epoch_train_acc
 
@@ -51,10 +53,12 @@ def test_step(val_dataloader: DataLoader,model: nn.Module,loss_fn: Callable,accu
             epoch_test_loss += te_loss
             epoch_test_acc += te_acc
     
-            test_loss.append(te_loss)
-            test_acc.append(te_acc)
+            
     epoch_test_loss = epoch_test_loss/len(val_dataloader)
     epoch_test_acc = epoch_test_acc/len(val_dataloader)
+    
+    test_loss.append(epoch_test_loss)
+    test_acc.append(epoch_test_acc)
                     
 
     return epoch_test_loss,epoch_test_acc

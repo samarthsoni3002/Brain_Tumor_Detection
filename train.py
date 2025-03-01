@@ -15,13 +15,6 @@ train_dataloader,val_dataloader,test_dataloader = prepare_data(data_path,"Traini
 
 model = model_builder(len(class_name))
 
-img,label = next(iter(train_dataloader))
-x = img[0].unsqueeze(dim=0)
-print("no probs")
-y = model(x)
-print(y)
-
-
 loss_fn = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
 
