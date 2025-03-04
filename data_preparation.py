@@ -5,11 +5,8 @@ from data_creation import BrainTumorDataset
 from pathlib import Path
 from typing import Tuple
 
-def prepare_data(path:Path, train_str:str,test_str:str) -> Tuple[DataLoader, DataLoader, DataLoader]:
-    data_path = Path(path)
-    train_path = data_path / "Training"
-    test_path = data_path / "Testing"
 
+def transformers():
     train_transforms = transforms.Compose([
         transforms.Resize((224, 224)),
         transforms.RandomCrop((200, 200)),
@@ -22,6 +19,15 @@ def prepare_data(path:Path, train_str:str,test_str:str) -> Tuple[DataLoader, Dat
         transforms.ToTensor(),
 
     ])
+
+    return train_transforms,test_transforms
+
+def prepare_data(path:Path, train_str:str,test_str:str) -> Tuple[DataLoader, DataLoader, DataLoader]:
+    data_path = Path(path)
+    train_path = data_path / "Training"
+    test_path = data_path / "Testing"
+    
+    train_transforms,test_transforms = transformers()
 
 
     train_dataset = BrainTumorDataset(train_path,train_transforms)

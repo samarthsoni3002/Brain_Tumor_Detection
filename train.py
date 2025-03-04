@@ -2,12 +2,12 @@ import torch
 import torch.nn as nn
 from data_preparation import prepare_data
 from model_builder import model_builder
-from train_utils import train_step,test_step,train
+from train_utils import train
 from utils import get_class_names, accuracy_fn
 from pathlib import Path
 from utils import evaluate
 import argparse
-from save_model_weights import save_model
+from save_and_load_model_weights import save_model
 
 
 parser = argparse.ArgumentParser(description="Train a model on the brain tumor dataset")
