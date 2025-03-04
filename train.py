@@ -7,6 +7,7 @@ from utils import get_class_names, accuracy_fn
 from pathlib import Path
 from utils import evaluate
 import argparse
+from save_model_weights import save_model
 
 
 parser = argparse.ArgumentParser(description="Train a model on the brain tumor dataset")
@@ -30,3 +31,6 @@ train_loss,train_acc,valid_loss,valid_acc = train(EPOCHS,train_dataloader,val_da
 
 test_acc = evaluate(model,test_dataloader)
 print(f"Test Accuracy: {test_acc}")
+
+
+save_model(model,"brain_tumor_model.pth")
